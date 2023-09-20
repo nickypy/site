@@ -19,6 +19,7 @@ var rootCmd = &cobra.Command{
 func Execute() {
 	rootCmd.AddCommand(buildCmd)
 	rootCmd.AddCommand(createCmd)
+	rootCmd.AddCommand(searchCmd)
 
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Fprintln(os.Stderr, err)
