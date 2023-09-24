@@ -3,6 +3,8 @@ package server
 import (
 	"bytes"
 	"fmt"
+	"os"
+	"path/filepath"
 	"regexp"
 	"strings"
 
@@ -15,13 +17,19 @@ type SearchEntry struct {
 }
 
 type SearchIndex struct {
-	Entries []SearchEntry
+	BasePath string
+	Entries  []SearchEntry
 }
 
 func NewSearchIndex() *SearchIndex {
 	i := make([]SearchEntry, 1024)
 
-	return &SearchIndex{i}
+	return &SearchIndex{"", i}
+}
+
+func (s *SearchIndex) WithPath(path string) *SearchIndex {
+	s.BasePath = path
+	return s
 }
 
 func (s *SearchIndex) IndexHTML(path string) {
@@ -46,7 +54,7 @@ func (s *SearchIndex) IndexHTML(path string) {
 
 				entry := SearchEntry{
 					Location: path,
-					Token: token,
+					Token:    token,
 				}
 				s.Entries = append(s.Entries, entry)
 			}
@@ -60,11 +68,90 @@ func sanitizeToken(token string) string {
 	return t
 }
 
-func Search() {
-	index := NewSearchIndex()
-	index.IndexHTML("dist/blog/test.html")
+func (s *SearchIndex) IndexAll() *SearchIndex {
+	_ = filepath.Walk(s.BasePath, func(p string, fi os.FileInfo, err error) (e error) {
+		if !fi.IsDir() {
+			if strings.HasSuffix(p, ".html") {
+				s.IndexHTML(p)
+			}
+		}
 
-	for _, entry := range index.Entries {
-		fmt.Println(entry)
+		return nil
+	})
+
+	return s
+}
+
+func (s *SearchIndex) Invert() *InvertedIndex {
+	// TODO: implement ranking by occurence
+
+	i := NewInvertedIndex()
+
+	for _, entry := range s.Entries {
+		i.Index(entry.Token, entry.Location)
 	}
+
+	return i
+}
+
+type InvertedIndexNode map[string]*InvertedIndex
+
+type InvertedIndex struct {
+	Nodes InvertedIndexNode `json:"n"`
+	Leaf  *string           `json:"l"`
+}
+
+func NewInvertedIndex() *InvertedIndex {
+	nodes := make(map[string]*InvertedIndex)
+	return &InvertedIndex{nodes, nil}
+}
+
+func separate(s string) (string, string) {
+	r := []rune(s)
+	if len(r) == 0 {
+		return "", ""
+	}
+	return string(r[0]), string(r[1:])
+}
+
+func (i *InvertedIndex) Index(token string, location string) {
+	first, rest := separate(token)
+	if first == "" {
+		i.Leaf = &location
+		return
+	}
+
+	if node, ok := i.Nodes[first]; ok {
+		node.Index(rest, location)
+	} else {
+		i.Nodes[first] = NewInvertedIndex()
+		i.Nodes[first].Index(rest, location)
+	}
+}
+
+func (i *InvertedIndex) Search(term string) []string {
+	results := i.search(term, make([]string, 0))
+	return results
+}
+
+func (i *InvertedIndex) search(term string, acc []string) []string {
+	first, rest := separate(term)
+
+	if leaf := i.Leaf; leaf != nil && first == "" {
+		acc = append(acc, *leaf)
+	}
+
+	if node, ok := i.Nodes[first]; ok && first != "" {
+		results := node.search(rest, acc)
+		acc = append(acc, results...)
+	}
+
+	return acc
+}
+
+func Search(term string) {
+	index := NewSearchIndex().WithPath("dist/blog").IndexAll().Invert()
+	results := index.Search(term)
+
+	fmt.Printf("%v\n", results)
 }

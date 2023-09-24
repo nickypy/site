@@ -9,6 +9,6 @@ var searchCmd = &cobra.Command{
 	Use:   "search",
 	Short: "experimental search index creation",
 	Run: func(cmd *cobra.Command, args []string) {
-		server.Search()
+		server.Search(args[0])
 	},
 }
