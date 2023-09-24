@@ -3,18 +3,32 @@ package server
 import (
 	"bytes"
 	"fmt"
+	"regexp"
 	"strings"
 
 	"golang.org/x/net/html"
 )
 
-func Search() {
-	contents := readFile("./dist/blog/test.html")
+type SearchEntry struct {
+	Location string
+	Token    string
+}
+
+type SearchIndex struct {
+	Entries []SearchEntry
+}
+
+func NewSearchIndex() *SearchIndex {
+	i := make([]SearchEntry, 1024)
+
+	return &SearchIndex{i}
+}
+
+func (s *SearchIndex) IndexHTML(path string) {
+	contents := readFile(path)
 
 	reader := bytes.NewReader(contents)
 	z := html.NewTokenizer(reader)
-
-	index := make(map[string]int)
 
 	for {
 		tt := z.Next()
@@ -27,17 +41,30 @@ func Search() {
 			text := z.Token().Data
 			tokens := strings.Fields(text)
 
-			for _, token := range tokens {
-				if _, ok := index[token]; ok {
-					index[token]++
-				} else {
-					index[token] = 1
+			for _, t := range tokens {
+				token := sanitizeToken(t)
+
+				entry := SearchEntry{
+					Location: path,
+					Token: token,
 				}
+				s.Entries = append(s.Entries, entry)
 			}
 		}
 	}
+}
 
-	for k, v := range index {
-		fmt.Println(k, v)
+func sanitizeToken(token string) string {
+	t := strings.ToLower(token)
+	t = regexp.MustCompile(`[^a-z0-9 ]+`).ReplaceAllString(t, "")
+	return t
+}
+
+func Search() {
+	index := NewSearchIndex()
+	index.IndexHTML("dist/blog/test.html")
+
+	for _, entry := range index.Entries {
+		fmt.Println(entry)
 	}
 }
