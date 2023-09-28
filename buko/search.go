@@ -2,6 +2,7 @@ package server
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -147,6 +148,21 @@ func (i *InvertedIndex) search(term string, acc []string) []string {
 	}
 
 	return acc
+}
+
+func LoadFromFile(path string) (*SearchIndex, error) {
+	contents, err := os.ReadFile(path)
+	if err != nil {
+		return nil, err
+	}
+
+	var searchIndex SearchIndex
+	err = json.Unmarshal(contents, &searchIndex)
+	if err != nil {
+		return nil, err
+	}
+
+	return &searchIndex, nil
 }
 
 func Search(term string) {

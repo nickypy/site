@@ -7,6 +7,12 @@ import (
 	"github.com/spf13/cobra"
 )
 
+const DEFAULT_INPUT_PATH = "assets"
+const DEFAULT_OUTPUT_PATH = "dist"
+
+var InputPath string
+var OutputPath string
+
 var rootCmd = &cobra.Command{
 	Use:   "site",
 	Short: "Utilities for building and serving nickypy-site.",
@@ -25,4 +31,10 @@ func Execute() {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}
+}
+
+func init() {
+	flags := rootCmd.Flags()
+	flags.StringVarP(&InputPath, "input", "i", DEFAULT_INPUT_PATH, "Source directory for markdown")
+	flags.StringVarP(&OutputPath, "output", "o", DEFAULT_OUTPUT_PATH, "Output directory for rendered assets")
 }

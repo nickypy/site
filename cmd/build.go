@@ -10,13 +10,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var InputPath string
-var OutputPath string
-
 var ListUnpublished bool
-
-const DEFAULT_INPUT_PATH = "."
-const DEFAULT_OUTPUT_PATH = "dist"
 
 var buildCmd = &cobra.Command{
 	Use:   "build",
@@ -56,7 +50,5 @@ var buildCmd = &cobra.Command{
 
 func init() {
 	flags := buildCmd.Flags()
-	flags.StringVarP(&InputPath, "input", "i", DEFAULT_INPUT_PATH, "Source directory for markdown")
-	flags.StringVarP(&OutputPath, "output", "o", DEFAULT_OUTPUT_PATH, "Output directory for rendered assets")
 	flags.BoolVar(&ListUnpublished, "include-unpublished", false, "List unpublished posts")
 }
