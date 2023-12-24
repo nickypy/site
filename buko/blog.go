@@ -100,8 +100,8 @@ func (b *BlogRenderCache) Render() {
 	b.Items = make([]BlogPost, 0)
 
 	CopyDirectory(
-		path.Join(b.Prefix, "static"),
-		path.Join(b.OutputPath, "static"),
+		path.Join(b.Prefix, "assets"),
+		path.Join(b.OutputPath),
 	)
 
 	_ = filepath.Walk(b.Prefix+"/markdown", func(path string, fi os.FileInfo, err error) (e error) {
