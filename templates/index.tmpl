@@ -1,0 +1,33 @@
+{{ define "body" }}
+
+{{ $length := len .BlogItems }}
+{{ if ne $length 0 }}
+<h2 class="blog-header">blog</h2>
+<ul class="blog-list">
+  {{ range .BlogItems }}
+    <li>
+      <span class="blog-list-item">
+        <p class="mono">{{ .FormatDate }}</p>
+        <a href="{{.Path}}">{{.Metadata.Title}}</a>
+      </span>
+    </li>
+  {{ end }}
+</ul>
+{{ end }}
+
+{{ $length := len .Links.External }}
+{{ if ne $length 0 }}
+<h2 class=blog-header>publications</h2>
+<ul class="blog-list">
+  {{ range .Links.External }}
+  <li>
+    <span class="blog-list-item">
+      <p class="mono">{{ .FormatDate }}</p>
+      <a href="{{ .Link }}" target="_blank">{{ .Title }}</a>
+    </span>
+  </li>
+  {{ end }}
+</ul>
+{{ end }}
+
+{{ end }}

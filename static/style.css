@@ -1,0 +1,259 @@
+:root {
+    --background: #282a36;
+    --foreground: #d1d6db;
+    --dimmed: #44475a;
+    --purple: #887eab;
+    --pink: #ff79c6;
+    --cyan: #8be9fd;
+    --green: #50fa7b;
+    --orange: #ffb86c;
+    --highlight: #6272a4;
+
+    --default-margin: 1.5rem;
+    --default-padding: 1rem;
+    --border-radius: 0.2rem;
+
+    --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    --monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+    --size-h1: 1.5rem;
+    --size-h2: 1.25rem;
+    --size-h3: 1.125rem;
+}
+
+html {
+    font-family: var(--font-family);
+    font-size: 16px;
+    font-weight: 500;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--foreground);
+}
+
+h1 {
+    color: var(--foreground);
+    padding-top: var(--default-padding);
+    font-size: var(--size-h1);
+}
+
+h2 {
+    color: var(--foreground);
+    padding-top: var(--default-padding);
+    font-size: var(--size-h2);
+}
+
+h3 {
+    color: var(--foreground);
+    padding-top: var(--default-padding);
+    font-size: var(--size-h3);
+}
+
+em {
+    color: var(--pink);
+}
+
+strong {
+    color: var(--cyan);
+}
+
+del {
+    color: var(--dimmed);
+}
+
+pre {
+    border: 0.1rem solid var(--dimmed);
+    border-radius: var(--border-radius);
+    padding: var(--default-padding);
+    overflow-x: scroll;
+    margin-top: var(--default-margin);
+}
+
+blockquote {
+    margin-top: var(--default-margin);
+    padding-left: var(--default-padding);
+    border-left: 0.25rem solid var(--dimmed);
+}
+
+blockquote > p {
+    padding-top: 0;
+}
+
+code {
+    font-family: var(--monospace);
+    background-color: var(--dimmed);
+    border-radius: var(--border-radius);
+    padding: 0.2rem;
+}
+
+pre > code {
+    background-color: unset;
+    padding: unset;
+}
+
+hr {
+    border: 0.1rem solid var(--dimmed);
+    border-radius: var(--border-radius);
+    margin: 0.5rem 0rem;
+}
+
+table {
+    border: solid var(--dimmed);
+    border-radius: var(--border-radius);
+    margin-top: var(--default-margin);
+    padding: var(--default-padding);
+}
+
+a {
+    color: var(--foreground);
+    text-decoration: underline;
+    text-decoration-color: var(--purple);
+}
+
+a:hover {
+    text-decoration-color: var(--pink);
+}
+
+*,
+:after,
+:before {
+    box-sizing: border-box;
+    margin: 0
+}
+
+.blog-container {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+ol, ul {
+    padding-left: var(--default-padding);
+}
+
+li {
+    padding-top: var(--default-padding);
+}
+
+p {
+    line-height: 1.5;
+    padding-top: var(--default-padding);
+}
+
+.mono {
+    font-family: var(--monospace);
+}
+
+.header {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.blog-header {
+    color: var(--foreground);
+    font-size: var(--size-h1);
+    font-weight: bolder;
+    text-align: left;
+}
+
+.blog-body {
+    width: 70%;
+    max-width: 50em;
+    align-items: left;
+    text-align: left;
+    padding: 2rem;
+    flex: auto;
+}
+
+.blog-links {
+    margin-left: auto;
+}
+
+.blog-link {
+    padding-left: var(--default-padding);
+}
+
+.blog-list {
+    padding-bottom: var(--default-padding);
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.blog-list-item {
+    display: flex;
+}
+
+.blog-list-item > p {
+    padding-top: 0;
+    padding-right: var(--default-padding);
+    width: 20%;
+}
+
+.blog-list-item > a {
+    width: 80%;
+}
+
+@media only screen and (max-width:768px) {
+    .blog-container {
+        min-height: 0vh;
+    }
+
+    .blog-body {
+        max-width: 100%;
+        padding: 1.25rem;
+    }
+
+    .blog-list-item > p {
+        width: 40%;
+    }
+}
+
+.ghosty {
+    -webkit-animation: appear 1s;
+}
+
+.ghosty:hover {
+    opacity: 0.5
+}
+
+.icon {
+    height: 1.5em;
+    width: 1.5em;
+    vertical-align: bottom;
+}
+
+.header-link {
+    color: var(--foreground);
+}
+
+.header-link:hover {
+    color: var(--purple);
+}
+
+@-webkit-keyframes appear {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

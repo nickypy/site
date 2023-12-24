@@ -1,0 +1,26 @@
+# links to other profiles
+profiles:
+-
+  title: github
+  link: https://github.com/nickypy
+-
+  title: mastodon
+  link: https://hachyderm.io/@nickypy
+-
+  title: linkedin
+  link: https://linkedin.com/in/nickypy
+
+# stuff published elsewhere that i wrote
+external_posts:
+-
+  title: "Behind the Scenes: Improving Google Spanner Efficiency"
+  link: https://blog.imgix.com/2023/11/17/improving-google-spanner-efficiency
+  date: 2023-11-17T00:00:00Z
+-
+  title: "Under the Hood: Image Manager and Color Search"
+  link: https://blog.imgix.com/2020/12/17/color-search
+  date: 2020-12-17T00:00:00Z
+-
+  title: Flash-Bang Detector to Model the Attenuation of High-Energy Photons
+  link: https://ui.adsabs.harvard.edu/abs/2015AGUFMAE33A0479P/abstract
+  date: 2015-12-01T00:00:00Z

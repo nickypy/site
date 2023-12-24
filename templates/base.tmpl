@@ -1,0 +1,50 @@
+{{ define "base" }}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>{{ .Title }}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta data-hid="description" name="description" content="Blog">
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+
+  <link rel="preload" href="/static/style.css" as="style" type="text/css">
+  <link rel="preload" href="/static/ghosty.svg" as="image" type="image/svg+xml">
+
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="blog-container">
+    <div class="blog-body">
+      <div class="header">
+        <span class="blog-header">
+          <a href="/" style="text-decoration:none">
+            <img src="/static/ghosty.svg" class="ghosty icon" alt="logo">
+          </a>
+          <a href="/" style="text-decoration:none">nickypy</a>
+        </span>
+
+        {{ $length := len .Links.Profiles }}
+        {{ if ne $length 0 }}
+        <span class="blog-links">
+          {{ range .Links.Profiles }}
+          <span class="blog-link">
+            <a href="{{ .Link }}" target="_blank" rel="me" style="text-decoration:none">
+              <svg width="16" height="16" fill="currentColor" class="header-link icon" viewBox="0 0 16 16">
+                {{ .SVGSource }}
+              </svg>
+            </a>
+          </span>
+          {{ end }}
+        </span>
+        {{ end }}
+      </div>
+      <hr>
+
+      {{ template "body" . }}
+    </div>
+  </div>
+</body>
+</html>
+{{ end }}
