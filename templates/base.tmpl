@@ -15,36 +15,33 @@
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-  <div class="blog-container">
-    <div class="blog-body">
-      <div class="header">
-        <span class="blog-header">
-          <a href="/" style="text-decoration:none">
-            <img src="/ghosty.svg" class="ghosty icon" alt="logo">
-          </a>
-          <a href="/" style="text-decoration:none">nickypy</a>
-        </span>
+  <header>
+    <a href="/" style="text-decoration:none">
+      <img src="/ghosty.svg" class="ghosty icon">
+    </a>
+  </header>
 
-        {{ $length := len .Links.Profiles }}
-        {{ if ne $length 0 }}
-        <span class="blog-links">
-          {{ range .Links.Profiles }}
-          <span class="blog-link">
-            <a href="{{ .Link }}" target="_blank" rel="me" style="text-decoration:none">
-              <svg width="16" height="16" fill="currentColor" class="header-link icon" viewBox="0 0 16 16">
-                {{ .SVGSource }}
-              </svg>
-            </a>
-          </span>
-          {{ end }}
-        </span>
-        {{ end }}
-      </div>
-      <hr>
-
-      {{ template "body" . }}
-    </div>
+  <article>
+    {{ template "body" . }}
+  </article>
   </div>
+
+  <footer>
+    {{ $length := len .Links.Profiles }}
+    {{ if ne $length 0 }}
+    <span class="links">
+      {{ range .Links.Profiles }}
+      <span class="link">
+        <a href="{{ .Link }}" target="_blank" rel="me" style="text-decoration:none">
+          <svg width="16" height="16" fill="currentColor" class="link icon" viewBox="0 0 16 16">
+            {{ .SVGSource }}
+          </svg>
+        </a>
+      </span>
+      {{ end }}
+    </span>
+    {{ end }}
+  </footer>
 </body>
 </html>
 {{ end }}

@@ -2,11 +2,11 @@
 
 {{ $length := len .BlogItems }}
 {{ if ne $length 0 }}
-<h2 class="blog-header">blog</h2>
-<ul class="blog-list">
+<h2>blog</h2>
+<ul class="home-ul">
   {{ range .BlogItems }}
     <li>
-      <span class="blog-list-item">
+      <span class="home-li">
         <p class="mono">{{ .FormatDate }}</p>
         <a href="{{.Path}}">{{.Metadata.Title}}</a>
       </span>
@@ -17,11 +17,11 @@
 
 {{ $length := len .Links.External }}
 {{ if ne $length 0 }}
-<h2 class=blog-header>publications</h2>
-<ul class="blog-list">
+<h2>publications</h2>
+<ul class="home-ul">
   {{ range .Links.External }}
   <li>
-    <span class="blog-list-item">
+    <span class="home-li">
       <p class="mono">{{ .FormatDate }}</p>
       <a href="{{ .Link }}" target="_blank">{{ .Title }}</a>
     </span>

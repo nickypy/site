@@ -38,11 +38,11 @@ regular _italic_ **bold** ~~strikethrough~~ `inline code`
 > This is another line in the same blockquote.
 
 
-| Column 1 | Column 2 | Column 3 |
-| --- | --- | ---: |
-| a | foo | 1 |
-| b | bar | 2 |
-| c | baz | 3 |
+| Column 1 | Column 2 | Column 3 | Column 4 | Column 5 | very long column name |
+| --- | --- | --- | --- | --- | --: |
+| text | foo | 1 | text | text | text |
+| text | bar | 2 | text | text | text |
+| text | baz | 3 | text | text | text |
 
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nibh nisl condimentum id venenatis a condimentum vitae sapien pellentesque. Odio morbi quis commodo odio aenean sed adipiscing diam donec. Aliquam purus sit amet luctus venenatis lectus. Dignissim sodales ut eu sem integer vitae justo. Fames ac turpis egestas maecenas pharetra convallis posuere morbi leo. Lectus nulla at volutpat diam ut. Nulla facilisi morbi tempus iaculis urna id volutpat lacus laoreet. Laoreet suspendisse interdum consectetur libero id faucibus nisl tincidunt. Commodo quis imperdiet massa tincidunt nunc pulvinar. Velit euismod in pellentesque massa placerat duis ultricies lacus. Egestas maecenas pharetra convallis posuere morbi.<br>
