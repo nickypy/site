@@ -11,9 +11,9 @@ clean:
 	- rm site
 	- rm -rf dist
 
-.PHONY: debug
-debug:
-	@python3 -m http.server -d dist
+.PHONY: serve
+serve:
+	@go run github.com/eliben/static-server@latest dist
 
 .PHONY: docker
 docker:
