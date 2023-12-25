@@ -60,11 +60,14 @@ article {
     padding: 2rem;
     padding-top: 0;
     flex: 1;
+    border: 0.1rem solid var(--dimmed);
+    border-radius: var(--border-radius);
+    margin: 0.5rem 0rem;
 }
 
 @media only screen and (max-width:768px) {
     article {
-        width: 100%;
+        width: 94%;
         padding: 1.25rem;
     }
 }
@@ -141,7 +144,8 @@ table {
     border-radius: var(--border-radius);
     margin-top: var(--default-margin);
     padding: var(--default-padding);
-    width: 100%;
+    overflow-x: auto;
+    display: inherit;
 }
 
 a {
