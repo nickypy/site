@@ -16,8 +16,8 @@
 </head>
 <body>
   <header>
-    <a href="/" style="text-decoration:none">
-      <img src="/ghosty.svg" class="ghosty icon">
+    <a href="/" style="text-decoration:none" aria-label="home">
+      <img src="/ghosty.svg" class="ghosty icon" alt="">
     </a>
   </header>
 
@@ -32,7 +32,7 @@
     <span class="links">
       {{ range .Links.Profiles }}
       <span class="link">
-        <a href="{{ .Link }}" target="_blank" rel="me" style="text-decoration:none">
+        <a href="{{ .Link }}" target="_blank" rel="me" style="text-decoration:none" aria-label="{{ .Title }}">
           <svg width="16" height="16" fill="currentColor" class="link icon" viewBox="0 0 16 16">
             {{ .SVGSource }}
           </svg>
