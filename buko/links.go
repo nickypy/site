@@ -11,13 +11,13 @@ import (
 var LINKS_PATH = "config/links.yml"
 
 type LinkMetadata struct {
-	Profiles []ProfileMetadata `yaml:"profiles"` 
+	Profiles []ProfileMetadata       `yaml:"profiles"`
 	External []ExternalPostsMetadata `yaml:"external_posts"`
 }
 
 type ProfileMetadata struct {
 	Title string `yaml:"title"`
-	Link string `yaml:"link"`
+	Link  string `yaml:"link"`
 }
 
 func (pm ProfileMetadata) SVGSource() string {
@@ -27,9 +27,9 @@ func (pm ProfileMetadata) SVGSource() string {
 }
 
 type ExternalPostsMetadata struct {
-	Title string `yaml:"title"`
-	Link string `yaml:"link"`
-	Date time.Time `yaml:"date"`
+	Title string    `yaml:"title"`
+	Link  string    `yaml:"link"`
+	Date  time.Time `yaml:"date"`
 }
 
 func (epm ExternalPostsMetadata) FormatDate() string {

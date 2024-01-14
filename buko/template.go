@@ -40,5 +40,5 @@ type IndexTemplateArgs struct {
 type PostTemplateArgs struct {
 	Title string
 	Body  string
-	Links     LinkMetadata
+	Links LinkMetadata
 }

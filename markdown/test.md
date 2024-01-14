@@ -2,6 +2,7 @@
 title: Test
 date: 2022-10-16T00:00:00Z
 published: false
+slug: /blog/test
 ---
 
 # h1

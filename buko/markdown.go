@@ -13,6 +13,7 @@ type BlogMetadata struct {
 	Title       string    `yaml:"title"`
 	IsPublished bool      `yaml:"published"`
 	Date        time.Time `yaml:"date"`
+	Slug        string    `yaml:"slug"`
 	Tags        []string  `yaml:"tags"`
 }
 
@@ -21,6 +22,7 @@ func CreateNewMarkdownFile(title string, path string) {
 		Title:       title,
 		IsPublished: false,
 		Date:        time.Now(),
+		Slug:        "",
 		Tags:        make([]string, 0),
 	})
 
@@ -30,7 +32,7 @@ func CreateNewMarkdownFile(title string, path string) {
 
 	contents := fmt.Sprintf("---\n%s---\n", header)
 
-	filename := makeURLSlug(title) + ".md"
+	filename := makeFilename(title) + ".md"
 	out := p.Join(path, filename)
 
 	writeFile(out, []byte(contents))

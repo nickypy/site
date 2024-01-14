@@ -2,6 +2,7 @@
 title: ChatGPT Draws Jigglypuff
 date: 2023-08-09T00:00:00Z
 published: false
+slug: /blog/chatgpt-ascii-art
 ---
 
 Here's a transcript between ChatGPT and I:

@@ -145,10 +145,9 @@ func (b *BlogRenderCache) renderMarkdown(filepath string) {
 		metadata.IsPublished = true
 	}
 
-	slug := makeURLSlug(metadata.Title)
 	post := BlogPost{
-		slug,
-		path.Join(BLOG_BASE_PATH, slug) + ".html",
+		metadata.Slug,
+		metadata.Slug + ".html",
 		body.String(),
 		metadata,
 	}
@@ -190,7 +189,7 @@ func (b *BlogRenderCache) renderIndex() {
 		&body,
 		INDEX_TEMPLATE,
 		IndexTemplateArgs{
-			Title:    "nickypy: blog",
+			Title:     "nickypy: blog",
 			Body:      body.String(),
 			BlogItems: publishableItems,
 			Links:     b.Links,
