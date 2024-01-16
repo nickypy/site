@@ -1,6 +1,6 @@
 ---
 title: Notes on Python Protocols
-published: false
+published: true
 date: 2024-01-15T09:30:04.787298-08:00
 slug: "/blog/python-protocols"
 tags:
