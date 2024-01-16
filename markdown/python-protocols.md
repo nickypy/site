@@ -18,7 +18,7 @@ I’d like to annotate this function to gain some benefits of type checking. Whi
 
 Protocols in Python (PEP 544) allow for statically checking whether an object implements a specific method (see interfaces in Go, or traits in Rust). Protocols are also referred to as structural subtyping, or static duck typing.
 
-## Primer
+## Introduction
 
 We can define a protocol by subclassing `Protocol` from the `typing` module:
 
@@ -43,7 +43,7 @@ class A:
 foo(A())
 ```
 
-The type checker will give you a piece of its mind if we call our new function with an invalid object.
+Let's see what happens when we use invalid object that does not implement `.bar()`:
 
 ```python
 class B:
@@ -51,6 +51,8 @@ class B:
 
 foo(B())
 ```
+
+Oof. The type checker gave us a piece of its mind.
 
 ```bash
 error: Argument 1 to "foo" has incompatible type "B"; expected "Foo"  [arg-type]
@@ -118,4 +120,4 @@ $ mypy your_file.py
 Success: no issues found in 1 source file
 ```
 
-Protocols provide a convenient way to type-check whether the supplied arguments are valid. They are useful for scenarios where accepting concrete types is either too verbose or not possible. The original PEP contains even more ways to use protocols, motivations behind the protocol, as well as reasons for implementing things the way they are.
+Protocols provide a convenient way to type-check whether the supplied arguments are valid. They are useful for scenarios where accepting concrete types is either too verbose or not possible. The [original PEP](https://peps.python.org/pep-0544/) contains even more ways to use protocols, motivations behind the protocol, as well as reasons for implementing things the way they are.
