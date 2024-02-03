@@ -54,21 +54,22 @@ footer {
 }
 
 article {
-    width: 66%;
+    max-width: 80ch;
     align-items: left;
     text-align: left;
-    padding: 2rem;
     padding-top: 0;
+    padding-bottom: var(--default-padding);
     flex: 1;
-    border: 0.1rem solid var(--dimmed);
-    border-radius: var(--border-radius);
+    border-top: 0.1rem solid var(--dimmed);
+    border-bottom: 0.1rem solid var(--dimmed);
     margin: 0.5rem 0rem;
 }
 
 @media only screen and (max-width:768px) {
     article {
         width: 94%;
-        padding: 1.25rem;
+        padding: 0;
+        padding-bottom: var(--default-padding);
     }
 }
 
@@ -178,24 +179,24 @@ p {
     padding-top: var(--default-padding);
 }
 
-.mono {
-    font-family: var(--monospace);
-}
-
-.home-ul {
+.home-table {
+    margin: 0;
     padding-bottom: var(--default-padding);
-    list-style-type: none;
     padding-left: 0;
+    border: none;
 }
 
-.home-li {
-    display: flex;
+.home-td {
+    padding-bottom: var(--default-padding);
+    vertical-align: top;
 }
 
-.home-li > p {
-    padding-top: 0;
-    padding-right: var(--default-padding);
-    white-space: nowrap;
+.home-td.date {
+    width: 10ch;
+}
+
+.home-td > a {
+    text-decoration: none;
 }
 
 .ghosty {

@@ -3,31 +3,31 @@
 {{ $length := len .BlogItems }}
 {{ if ne $length 0 }}
 <h2>blog</h2>
-<ul class="home-ul">
-  {{ range .BlogItems }}
-    <li>
-      <span class="home-li">
-        <p class="mono">{{ .FormatDate }}</p>
-        <a href="{{.Path}}">{{.Metadata.Title}}</a>
-      </span>
-    </li>
-  {{ end }}
-</ul>
+<table class="home-table">
+  <tbody>
+    {{ range .BlogItems }}
+    <tr class="home-tr">
+      <td class="home-td date"><time>{{ .FormatDate }}</time></td>
+      <td class="home-td"><a href="{{ .Path }}" target="_blank">{{ .Metadata.Title }}</a></td>
+    </tr>
+    {{ end }}
+  </tbody>
+</table>
 {{ end }}
 
 {{ $length := len .Links.External }}
 {{ if ne $length 0 }}
 <h2>publications</h2>
-<ul class="home-ul">
-  {{ range .Links.External }}
-  <li>
-    <span class="home-li">
-      <p class="mono">{{ .FormatDate }}</p>
-      <a href="{{ .Link }}" target="_blank">{{ .Title }}</a>
-    </span>
-  </li>
-  {{ end }}
-</ul>
+<table class="home-table">
+  <tbody>
+    {{ range .Links.External }}
+    <tr class="home-tr">
+      <td class="home-td date"><time>{{ .FormatDate }}</time></td>
+      <td class="home-td"><a href="{{ .Link }}" target="_blank">{{ .Title }}</a></td>
+    </tr>
+    {{ end }}
+  </tbody>
+</table>
 {{ end }}
 
 {{ end }}
