@@ -9,6 +9,9 @@ profiles:
 -
   title: linkedin
   link: https://linkedin.com/in/nickypy
+-
+  title: feed
+  link: /feed/atom.xml
 
 # stuff published elsewhere that i wrote
 external_posts:
