@@ -3,6 +3,7 @@ module github.com/nickypy/site
 go 1.21
 
 require (
+	github.com/gorilla/feeds v1.1.2
 	github.com/spf13/cobra v1.6.1
 	github.com/yuin/goldmark v1.5.2
 	github.com/yuin/goldmark-highlighting/v2 v2.0.0-20220924101305-151362477c87
