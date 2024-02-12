@@ -119,6 +119,7 @@ func (b *BlogRenderCache) Render() {
 
 	wg.Wait()
 	b.renderIndex()
+	b.generateAtomFeed()
 }
 
 func (b *BlogRenderCache) renderMarkdown(filepath string) {
