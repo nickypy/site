@@ -8,7 +8,7 @@
     {{ range .BlogItems }}
     <tr class="home-tr">
       <td class="home-td date"><time>{{ .FormatDate }}</time></td>
-      <td class="home-td"><a href="{{ .Path }}" target="_blank">{{ .Metadata.Title }}</a></td>
+      <td class="home-td"><a href="{{ .Path }}">{{ .Metadata.Title }}</a></td>
     </tr>
     {{ end }}
   </tbody>
