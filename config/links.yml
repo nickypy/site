@@ -7,9 +7,6 @@ profiles:
   title: mastodon
   link: https://hachyderm.io/@nickypy
 -
-  title: linkedin
-  link: https://linkedin.com/in/nickypy
--
   title: feed
   link: /feed/atom.xml
 
