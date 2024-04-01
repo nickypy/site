@@ -1,20 +1,16 @@
 :root {
-    --background: #282a36;
-    --foreground: #d1d6db;
-    --dimmed: #44475a;
-    --purple: #887eab;
-    --pink: #ff79c6;
-    --cyan: #8be9fd;
-    --green: #50fa7b;
-    --orange: #ffb86c;
-    --highlight: #6272a4;
+    --background: #242424;
+    --foreground: #d9d9d9;
+    --dimmed: #303030;
+    --primary: #215957;
+    --secondary: #888098;
 
     --default-margin: 1.5rem;
     --default-padding: 1rem;
     --border-radius: 0.2rem;
 
-    --font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    --monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --font-family: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace; 
+    --monospace: var(--font-family);
 
     --size-h1: 1.5rem;
     --size-h2: 1.25rem;
@@ -76,29 +72,25 @@ article {
 
 
 h1 {
-    color: var(--foreground);
+    color: var(--secondary);
     padding-top: var(--default-padding);
     font-size: var(--size-h1);
+    text-decoration-line: underline;
+    text-decoration-color: var(--primary);
 }
 
 h2 {
-    color: var(--foreground);
+    color: var(--secondary);
     padding-top: var(--default-padding);
     font-size: var(--size-h2);
+    text-decoration-line: underline;
+    text-decoration-color: var(--primary);
 }
 
 h3 {
     color: var(--foreground);
     padding-top: var(--default-padding);
     font-size: var(--size-h3);
-}
-
-em {
-    color: var(--pink);
-}
-
-strong {
-    color: var(--cyan);
 }
 
 del {
@@ -125,7 +117,7 @@ blockquote > p {
 
 code {
     font-family: var(--monospace);
-    background-color: var(--dimmed);
+    background-color: var(--primary);
     border-radius: var(--border-radius);
     padding: 0.2rem;
 }
@@ -153,11 +145,11 @@ table {
 a {
     color: var(--foreground);
     text-decoration: underline;
-    text-decoration-color: var(--purple);
+    text-decoration-color: var(--secondary);
 }
 
 a:hover {
-    text-decoration-color: var(--pink);
+    text-decoration-color: var(--primary);
 }
 
 *,
@@ -219,5 +211,5 @@ p {
 }
 
 .link:hover {
-    color: var(--purple);
+    color: var(--secondary);
 }
