@@ -70,26 +70,23 @@ article {
     }
 }
 
-
-h1 {
+h1, h2, h3 {
     color: var(--secondary);
     padding-top: var(--default-padding);
-    font-size: var(--size-h1);
     text-decoration-line: underline;
     text-decoration-color: var(--primary);
+}
+
+
+h1 {
+    font-size: var(--size-h1);
 }
 
 h2 {
-    color: var(--secondary);
-    padding-top: var(--default-padding);
     font-size: var(--size-h2);
-    text-decoration-line: underline;
-    text-decoration-color: var(--primary);
 }
 
 h3 {
-    color: var(--foreground);
-    padding-top: var(--default-padding);
     font-size: var(--size-h3);
 }
 
@@ -157,10 +154,6 @@ a:hover {
 :before {
     box-sizing: border-box;
     margin: 0
-}
-
-ol, ul {
-    padding-left: var(--default-padding);
 }
 
 li {

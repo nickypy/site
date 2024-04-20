@@ -64,7 +64,7 @@ func NewBlogRenderCache(prefix string, opts ...BlogOption) *BlogRenderCache {
 		goldmark.WithExtensions(
 			meta.Meta,
 			highlighting.NewHighlighting(
-				highlighting.WithStyle("nord"),
+				highlighting.WithStyle("doom-one"),
 			),
 			extension.GFM,
 		),
