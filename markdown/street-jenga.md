@@ -1,8 +1,10 @@
 ---
 title: Street Jenga
-date: 2024-04-30T00:00:00Z
+date: 2024-04-28
 published: true
 slug: /street-jenga
+tags:
+  - board games
 ---
 
 Street Jenga augments the [standard rules](https://www.jenga.com/about.php) of Jenga to facilitate many different chaotic play styles. The modifications to the rules are as follows:
