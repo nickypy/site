@@ -1,8 +1,8 @@
 ---
 title: Street Jenga
-date: 2024-04-28T00:00:00
+date: 2024-04-28T00:00:00.000000-08:00
 published: true
-slug: /street-jenga
+slug: "/street-jenga"
 tags:
   - board games
 ---
