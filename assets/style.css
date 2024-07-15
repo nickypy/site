@@ -1,16 +1,16 @@
 :root {
-    --background: #242424;
+    --background: #000000;
     --foreground: #d9d9d9;
-    --dimmed: #303030;
-    --primary: #215957;
-    --secondary: #888098;
+    --dimmed: #242424;
+    --primary: #d9d9d9;
+    --secondary: var(--primary);
 
     --default-margin: 1.5rem;
     --default-padding: 1rem;
     --border-radius: 0.2rem;
 
-    --font-family: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace; 
-    --monospace: var(--font-family);
+    --font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
+    --monospace: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
 
     --size-h1: 1.5rem;
     --size-h2: 1.25rem;
@@ -29,7 +29,7 @@ html {
 
 body {
     font-family: var(--font-family);
-    font-size: 14px;
+    font-size: 16px;
     background-color: var(--background);
     color: var(--foreground);
     min-height: 100vh;
@@ -91,7 +91,7 @@ h3 {
 }
 
 del {
-    color: var(--dimmed);
+    color: var(--foreground);
 }
 
 pre {
@@ -114,7 +114,7 @@ blockquote > p {
 
 code {
     font-family: var(--monospace);
-    background-color: var(--primary);
+    background-color: var(--dimmed);
     border-radius: var(--border-radius);
     padding: 0.2rem;
 }

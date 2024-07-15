@@ -16,6 +16,7 @@ import (
 	"github.com/yuin/goldmark/parser"
 	"github.com/yuin/goldmark/renderer/html"
 	"gopkg.in/yaml.v2"
+	"go.abhg.dev/goldmark/anchor"
 )
 
 const BASE_TEMPLATE = "/templates/base.tmpl"
@@ -64,13 +65,20 @@ func NewBlogRenderCache(prefix string, opts ...BlogOption) *BlogRenderCache {
 		goldmark.WithExtensions(
 			meta.Meta,
 			highlighting.NewHighlighting(
-				highlighting.WithStyle("doom-one"),
+				highlighting.WithStyle("swapoff"),
 			),
 			extension.GFM,
+			&anchor.Extender{
+				Position: anchor.After,
+				Texter: anchor.Text("#"),
+			},
 		),
 		goldmark.WithRendererOptions(
 			html.WithHardWraps(),
 			html.WithUnsafe(),
+		),
+		goldmark.WithParserOptions(
+			parser.WithAutoHeadingID(),
 		),
 	)
 
