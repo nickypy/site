@@ -51,6 +51,7 @@ footer {
 }
 
 article {
+    width: 100%;
     max-width: 80ch;
     align-items: left;
     text-align: left;
@@ -73,7 +74,6 @@ article {
 h1, h2, h3 {
     color: var(--secondary);
     padding-top: var(--default-padding);
-    text-decoration-line: underline;
     text-decoration-color: var(--primary);
 }
 
@@ -205,4 +205,23 @@ p {
 
 .link:hover {
     color: var(--secondary);
+}
+
+.iframe-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding-top: 75%;
+}
+
+.embed {
+    border: 0.1rem solid var(--dimmed);
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
 }
