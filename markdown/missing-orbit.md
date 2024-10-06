@@ -5,7 +5,7 @@ published: true
 slug: /missing-orbit
 ---
 
-Missing Orbit is visual art piece I made with [cables](https://cables.gl/about). The next iteration will use an FFT operator to visual some music I'm working on.
+Missing Orbit is visual art piece I made with [cables](https://cables.gl/about). The next iteration will use an FFT operator to visualize some music that I'm working on.
 
 <div class="iframe-container">
   <iframe class="embed" src="https://cables.gl/view/jxn84p"></iframe>
