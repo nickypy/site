@@ -1,6 +1,6 @@
 module github.com/nickypy/site
 
-go 1.21
+go 1.23
 
 require (
 	github.com/gorilla/feeds v1.1.2
