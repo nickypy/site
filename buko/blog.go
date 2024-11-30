@@ -47,7 +47,7 @@ func (post *BlogPost) FormatDate() string {
 	return post.Metadata.Date.Format("2006 Jan")
 }
 
-func NewBlogRenderCache(prefix string, opts ...BlogOption) *BlogRenderCache {
+func NewBlogRenderer(prefix string, outputPath string, opts ...BlogOption) *BlogRenderCache {
 	template := NewTemplateRenderer(prefix + BASE_TEMPLATE)
 	template.AddTemplate(
 		prefix+BLOG_POST_TEMPLATE,
@@ -59,7 +59,7 @@ func NewBlogRenderCache(prefix string, opts ...BlogOption) *BlogRenderCache {
 
 	blog := &BlogRenderCache{
 		Prefix:                prefix,
-		OutputPath:            "dist",
+		OutputPath:            outputPath,
 		Items:                 nil,
 		ShouldListUnpublished: false,
 		Links:                 links,
@@ -99,7 +99,7 @@ func (b *BlogRenderCache) Render() {
 	})
 
 	wg.Wait()
-	b.renderIndex()
+	b.renderPage()
 	b.generateAtomFeed()
 }
 
@@ -145,7 +145,7 @@ func (b *BlogRenderCache) renderMarkdown(filepath string) {
 	writeFile(path.Join(b.OutputPath, post.Path), blogPost.Bytes())
 }
 
-func (b *BlogRenderCache) renderIndex() {
+func (b *BlogRenderCache) renderPage() {
 	b.mutex.Lock()
 	defer b.mutex.Unlock()
 	sort.Slice(b.Items, func(i, j int) bool {

@@ -20,6 +20,6 @@ func (b *SiteBuilder) WithBlogOptions(opts []BlogOption) *SiteBuilder {
 }
 
 func (b SiteBuilder) Build() {
-	blogRenderer := NewBlogRenderCache(b.InputPath, b.BlogOptions...)
+	blogRenderer := NewBlogRenderer(b.InputPath, b.OutputPath, b.BlogOptions...)
 	blogRenderer.Render()
 }
