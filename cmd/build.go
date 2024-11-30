@@ -43,10 +43,10 @@ func build() {
 	}
 
 	log.Default().Println("Building assets...")
-	blog := server.NewBlogRenderCache(InputPath, opts...)
+	site := server.NewSiteBuilder(InputPath, OutputPath).WithBlogOptions(opts)
 
 	start := time.Now().UnixMilli()
-	blog.Render()
+	site.Build()
 	elapsed := time.Now().UnixMilli() - start
 
 	log.Default().Printf("Done. Took %dms.", elapsed)

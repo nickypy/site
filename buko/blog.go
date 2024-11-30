@@ -13,8 +13,8 @@ import (
 )
 
 const BASE_TEMPLATE = "/templates/base.tmpl"
-const BLOG_TEMPLATE = "/templates/blog.tmpl"
-const INDEX_TEMPLATE = "/templates/index.tmpl"
+const BLOG_POST_TEMPLATE = "/templates/blog_post.tmpl"
+const BLOG_PAGE_TEMPLATE = "/templates/blog.tmpl"
 const BLOG_BASE_PATH = "blog"
 
 type BlogOption func(*BlogRenderCache)
@@ -50,8 +50,8 @@ func (post *BlogPost) FormatDate() string {
 func NewBlogRenderCache(prefix string, opts ...BlogOption) *BlogRenderCache {
 	template := NewTemplateRenderer(prefix + BASE_TEMPLATE)
 	template.AddTemplate(
-		prefix+BLOG_TEMPLATE,
-		prefix+INDEX_TEMPLATE,
+		prefix+BLOG_POST_TEMPLATE,
+		prefix+BLOG_PAGE_TEMPLATE,
 	)
 
 	md := NewMarkdownRenderer()
@@ -134,7 +134,7 @@ func (b *BlogRenderCache) renderMarkdown(filepath string) {
 	var blogPost bytes.Buffer
 	b.template.Render(
 		&blogPost,
-		BLOG_TEMPLATE,
+		BLOG_POST_TEMPLATE,
 		PostTemplateArgs{
 			post.Metadata.Title,
 			post.Body,
@@ -162,7 +162,7 @@ func (b *BlogRenderCache) renderIndex() {
 
 	b.template.Render(
 		&body,
-		INDEX_TEMPLATE,
+		BLOG_PAGE_TEMPLATE,
 		IndexTemplateArgs{
 			Title:     "nickypy: blog",
 			Body:      body.String(),
