@@ -9,14 +9,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/yuin/goldmark"
-	highlighting "github.com/yuin/goldmark-highlighting/v2"
-	meta "github.com/yuin/goldmark-meta"
-	"github.com/yuin/goldmark/extension"
-	"github.com/yuin/goldmark/parser"
-	"github.com/yuin/goldmark/renderer/html"
 	"gopkg.in/yaml.v2"
-	"go.abhg.dev/goldmark/anchor"
 )
 
 const BASE_TEMPLATE = "/templates/base.tmpl"
@@ -38,7 +31,7 @@ type BlogRenderCache struct {
 	Items                 []BlogPost
 	ShouldListUnpublished bool
 	Links                 LinkMetadata
-	markdown              goldmark.Markdown
+	markdown              MarkdownRenderer
 	template              *TemplateRenderer
 	mutex                 *sync.RWMutex
 }
@@ -61,27 +54,7 @@ func NewBlogRenderCache(prefix string, opts ...BlogOption) *BlogRenderCache {
 		prefix+INDEX_TEMPLATE,
 	)
 
-	md := goldmark.New(
-		goldmark.WithExtensions(
-			meta.Meta,
-			highlighting.NewHighlighting(
-				highlighting.WithStyle("swapoff"),
-			),
-			extension.GFM,
-			&anchor.Extender{
-				Position: anchor.After,
-				Texter: anchor.Text("#"),
-			},
-		),
-		goldmark.WithRendererOptions(
-			html.WithHardWraps(),
-			html.WithUnsafe(),
-		),
-		goldmark.WithParserOptions(
-			parser.WithAutoHeadingID(),
-		),
-	)
-
+	md := NewMarkdownRenderer()
 	links := NewLinks()
 
 	blog := &BlogRenderCache{
@@ -131,17 +104,10 @@ func (b *BlogRenderCache) Render() {
 }
 
 func (b *BlogRenderCache) renderMarkdown(filepath string) {
-	md := readFile(filepath)
-
-	var body bytes.Buffer
-	ctx := parser.NewContext()
-	err := b.markdown.Convert(md, &body, parser.WithContext(ctx))
-	if err != nil {
-		panic(err)
-	}
+	frontmatter, body := b.markdown.Render(filepath)
 
 	var metadata BlogMetadata
-	out, err := yaml.Marshal(meta.Get(ctx))
+	out, err := yaml.Marshal(frontmatter)
 	if err != nil {
 		panic(err)
 	}
@@ -157,7 +123,7 @@ func (b *BlogRenderCache) renderMarkdown(filepath string) {
 	post := BlogPost{
 		metadata.Slug,
 		metadata.Slug + ".html",
-		body.String(),
+		body,
 		metadata,
 	}
 
