@@ -31,6 +31,7 @@ type BlogRenderCache struct {
 	Items                 []BlogPost
 	ShouldListUnpublished bool
 	Links                 LinkMetadata
+	filename              string
 	markdown              MarkdownRenderer
 	template              *TemplateRenderer
 	mutex                 *sync.RWMutex
@@ -47,7 +48,7 @@ func (post *BlogPost) FormatDate() string {
 	return post.Metadata.Date.Format("2006 Jan")
 }
 
-func NewBlogRenderer(prefix string, outputPath string, opts ...BlogOption) *BlogRenderCache {
+func NewBlogRenderer(prefix string, outputPath string, filename string, opts ...BlogOption) *BlogRenderCache {
 	template := NewTemplateRenderer(prefix + BASE_TEMPLATE)
 	template.AddTemplate(
 		prefix+BLOG_POST_TEMPLATE,
@@ -63,6 +64,7 @@ func NewBlogRenderer(prefix string, outputPath string, opts ...BlogOption) *Blog
 		Items:                 nil,
 		ShouldListUnpublished: false,
 		Links:                 links,
+		filename:              filename,
 		markdown:              md,
 		template:              template,
 		mutex:                 new(sync.RWMutex),
@@ -135,7 +137,7 @@ func (b *BlogRenderCache) renderMarkdown(filepath string) {
 	b.template.Render(
 		&blogPost,
 		BLOG_POST_TEMPLATE,
-		PostTemplateArgs{
+		BlogPostTemplateArgs{
 			post.Metadata.Title,
 			post.Body,
 			b.Links,
@@ -163,7 +165,7 @@ func (b *BlogRenderCache) renderPage() {
 	b.template.Render(
 		&body,
 		BLOG_PAGE_TEMPLATE,
-		IndexTemplateArgs{
+		BlogTemplateArgs{
 			Title:     "nickypy: blog",
 			Body:      body.String(),
 			BlogItems: publishableItems,
@@ -172,5 +174,5 @@ func (b *BlogRenderCache) renderPage() {
 	)
 
 	output := body.Bytes()
-	writeFile(path.Join(b.OutputPath, "index.html"), output)
+	writeFile(path.Join(b.OutputPath, b.filename), output)
 }

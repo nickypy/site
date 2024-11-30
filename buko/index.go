@@ -1,5 +1,9 @@
 package server
 
+import (
+	"path"
+)
+
 type SiteBuilder struct {
 	InputPath   string
 	OutputPath  string
@@ -20,6 +24,10 @@ func (b *SiteBuilder) WithBlogOptions(opts []BlogOption) *SiteBuilder {
 }
 
 func (b SiteBuilder) Build() {
-	blogRenderer := NewBlogRenderer(b.InputPath, b.OutputPath, b.BlogOptions...)
+	blogRenderer := NewBlogRenderer(b.InputPath, b.OutputPath, "blog.html", b.BlogOptions...)
 	blogRenderer.Render()
+
+	source := path.Join(b.OutputPath, blogRenderer.filename)
+	destination := path.Join(b.OutputPath, "index.html")
+	CopyFile(source, destination)
 }

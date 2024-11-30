@@ -30,14 +30,14 @@ func (t *TemplateRenderer) Render(out io.Writer, path string, data any) {
 	}
 }
 
-type IndexTemplateArgs struct {
+type BlogTemplateArgs struct {
 	Title     string
 	Body      string
 	BlogItems []BlogPost
 	Links     LinkMetadata
 }
 
-type PostTemplateArgs struct {
+type BlogPostTemplateArgs struct {
 	Title string
 	Body  string
 	Links LinkMetadata
