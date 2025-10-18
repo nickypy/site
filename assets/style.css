@@ -1,5 +1,5 @@
 :root {
-    --background: #000000;
+    --background: #111111;
     --foreground: #d9d9d9;
     --dimmed: #242424;
     --primary: #d9d9d9;
@@ -116,7 +116,8 @@ code {
     font-family: var(--monospace);
     background-color: var(--dimmed);
     border-radius: var(--border-radius);
-    padding: 0.2rem;
+    padding: 0.1rem;
+    font-size: 14px;
 }
 
 pre > code {

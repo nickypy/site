@@ -17,6 +17,8 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
+const THEME = "github-dark"
+
 type BlogMetadata struct {
 	Title       string    `yaml:"title"`
 	IsPublished bool      `yaml:"published"`
@@ -55,7 +57,7 @@ func NewMarkdownRenderer() MarkdownRenderer {
 		goldmark.WithExtensions(
 			meta.Meta,
 			highlighting.NewHighlighting(
-				highlighting.WithStyle("swapoff"),
+				highlighting.WithStyle(THEME),
 			),
 			extension.GFM,
 			&anchor.Extender{
