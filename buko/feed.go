@@ -10,7 +10,7 @@ import (
 	"github.com/gorilla/feeds"
 )
 
-func (b *BlogRenderCache) generateAtomFeed() {
+func GenerateAtomFeed(posts []BlogPost, outputPath string) {
 	now := time.Now()
 	author := &feeds.Author{Name: "nickypy", Email: ""}
 	baseLink := "https://nickypy.com"
@@ -25,7 +25,7 @@ func (b *BlogRenderCache) generateAtomFeed() {
 
 	var items []*feeds.Item
 
-	for _, item := range b.Items {
+	for _, item := range posts {
 		title := item.Metadata.Title
 		hash := sha256.Sum256([]byte(item.Metadata.Title))
 
@@ -49,5 +49,5 @@ func (b *BlogRenderCache) generateAtomFeed() {
 		log.Fatalln("Failed to generate atom feed %w", err)
 	}
 
-	writeFile(path.Join(b.OutputPath, "feed/atom.xml"), []byte(output))
+	writeFile(path.Join(outputPath, "feed/atom.xml"), []byte(output))
 }

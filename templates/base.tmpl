@@ -17,9 +17,21 @@
 </head>
 <body>
   <header>
-    <a href="/" style="text-decoration:none" aria-label="home">
-      <img src="/ghosty.svg" class="ghosty icon" alt="">
-    </a>
+    <nav>
+      <ul>
+        <li>
+          <a href="/" aria-label="home" class="logo">nickypy</a>
+        </li>
+        {{ $navLength := len .Nav.Items }}
+        {{ if ne $navLength 0 }}
+          {{ range .Nav.Items }}
+            <li>
+              <a href="{{ .Link }}" aria-label="{{ .Key }}">{{ .Key }}</a>
+            </li>
+          {{ end }}
+          </ul>
+        </nav>
+        {{ end }}
   </header>
 
   <article>

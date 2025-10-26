@@ -4,7 +4,10 @@ import (
 	"bytes"
 	"fmt"
 	"log"
+	"os"
+	"path"
 	p "path"
+	"strings"
 	"time"
 
 	"github.com/yuin/goldmark"
@@ -17,7 +20,8 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
-const THEME = "github-dark"
+const THEME = "modus-vivendi"
+const MD_PATH = "markdown"
 
 type BlogMetadata struct {
 	Title       string    `yaml:"title"`
@@ -79,9 +83,7 @@ func NewMarkdownRenderer() MarkdownRenderer {
 	}
 }
 
-func (mr *MarkdownRenderer) Render(filepath string) (map[string]interface{}, string) {
-	contents := readFile(filepath)
-
+func (mr *MarkdownRenderer) RenderBytes(contents []byte) (map[string]any, string) {
 	var body bytes.Buffer
 	ctx := parser.NewContext()
 	err := mr.md.Convert(contents, &body, parser.WithContext(ctx))
@@ -90,4 +92,62 @@ func (mr *MarkdownRenderer) Render(filepath string) (map[string]interface{}, str
 	}
 
 	return meta.Get(ctx), body.String()
+}
+
+
+func listFiles(directory string) []string {
+	entries, err := os.ReadDir(directory)
+	if err != nil {
+		panic(err)
+	}
+
+	files := make([]string, 0)
+
+	for _, entry := range entries {
+		canon := path.Join(directory, entry.Name())
+
+		if entry.IsDir() {
+			inner := listFiles(canon)
+			files = append(files, inner...)
+			continue
+		}
+
+		if strings.HasSuffix(canon, ".md") {
+			files = append(files, canon)
+		}
+	}
+
+	return files
+}
+
+type MarkdownFileEntry struct {
+	Content []byte
+	Key     string
+	Prefix  string
+}
+
+func GetAllMarkdownFiles() []MarkdownFileEntry {
+	files := make([]MarkdownFileEntry, 0)
+	for _, file := range listFiles(MD_PATH) {
+
+		content := readFile(file)
+		key := p.Base(file)
+
+		prefix := strings.TrimPrefix(
+			strings.TrimSuffix(file, key),
+			MD_PATH+"/",
+		)
+
+		prefix = strings.TrimSuffix(prefix, "/")
+
+		key = strings.TrimSuffix(key, ".md")
+
+		entry := MarkdownFileEntry{
+			content, key, prefix,
+		}
+
+		files = append(files, entry)
+	}
+
+	return files
 }

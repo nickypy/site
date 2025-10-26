@@ -1,6 +1,9 @@
 # links to other profiles
 profiles:
 -
+  title: bsky
+  link: https://bsky.app/profile/nickypy.bsky.social
+-
   title: github
   link: https://github.com/nickypy
 -

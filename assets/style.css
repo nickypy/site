@@ -2,14 +2,14 @@
     --background: #111111;
     --foreground: #d9d9d9;
     --dimmed: #242424;
-    --primary: #d9d9d9;
-    --secondary: var(--primary);
+    --primary: #32a895;
+    --secondary: #db8fda;
 
     --default-margin: 1.5rem;
     --default-padding: 1rem;
     --border-radius: 0.2rem;
 
-    --font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
+    --font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     --monospace: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
 
     --size-h1: 1.5rem;
@@ -36,6 +36,37 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+nav {
+    color: var(--foreground);
+    padding-top: var(--default-padding);
+}
+
+nav > ul {
+    display: block;
+    list-style-type: none;
+    display: flex;
+    padding-left: 0;
+}
+
+nav > ul > li {
+    display: block;
+    list-style-type: none;
+    padding: var(--default-padding);
+}
+
+nav > ul > li > a {
+    text-decoration: none;
+}
+
+nav > ul > li > a:hover {
+    color: var(--secondary);
+}
+
+.logo {
+    color: var(--primary);
+    font-weight: bold;
 }
 
 header, footer {
@@ -72,7 +103,7 @@ article {
 }
 
 h1, h2, h3 {
-    color: var(--secondary);
+    color: var(--primary);
     padding-top: var(--default-padding);
     text-decoration-color: var(--primary);
 }
@@ -143,11 +174,11 @@ table {
 a {
     color: var(--foreground);
     text-decoration: underline;
-    text-decoration-color: var(--secondary);
+    text-decoration-color: var(--primary);
 }
 
 a:hover {
-    text-decoration-color: var(--primary);
+    text-decoration-color: var(--secondary);
 }
 
 *,
@@ -225,4 +256,20 @@ p {
     width: 100%;
     height: 100%;
     margin: 0;
+}
+
+.yt-embed {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    margin-top: 2rem;
+}
+
+.yt-embed iframe {
+    position: absolute;
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
 }

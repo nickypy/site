@@ -6,9 +6,9 @@ import (
 	"path"
 	"time"
 
+	"github.com/fsnotify/fsnotify"
 	"github.com/nickypy/site/buko"
 	"github.com/spf13/cobra"
-	"github.com/fsnotify/fsnotify"
 )
 
 var InputPath string
@@ -28,12 +28,6 @@ func build() {
 
 	outputPath := path.Join(cwd, OutputPath)
 
-	opts := make([]server.BlogOption, 0)
-
-	if ListUnpublished {
-		opts = append(opts, server.RenderUnpublished())
-	}
-
 	log.Default().Println("Cleaning out previous build...")
 	err = os.RemoveAll(outputPath)
 	if err != nil {
@@ -43,7 +37,8 @@ func build() {
 	}
 
 	log.Default().Println("Building assets...")
-	site := server.NewSiteBuilder(InputPath, OutputPath).WithBlogOptions(opts)
+	site := server.NewSiteBuilder(InputPath, OutputPath)
+	site.ListUnpublished = ListUnpublished
 
 	start := time.Now().UnixMilli()
 	site.Build()
@@ -54,41 +49,41 @@ func build() {
 
 func watch() {
 	// Create new watcher.
-    watcher, err := fsnotify.NewWatcher()
-    if err != nil {
-        log.Fatal(err)
-    }
-    defer watcher.Close()
+	watcher, err := fsnotify.NewWatcher()
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer watcher.Close()
 
-    // Start listening for events.
-    go func() {
-        for {
-            select {
-            case event, ok := <-watcher.Events:
-                if !ok {
-                    return
-                }
-                log.Println("event:", event)
-                if event.Has(fsnotify.Write) {
-                    log.Println("modified file:", event.Name)
-                }
-            case err, ok := <-watcher.Errors:
-                if !ok {
-                    return
-                }
-                log.Println("error:", err)
-            }
-        }
-    }()
+	// Start listening for events.
+	go func() {
+		for {
+			select {
+			case event, ok := <-watcher.Events:
+				if !ok {
+					return
+				}
+				log.Println("event:", event)
+				if event.Has(fsnotify.Write) {
+					log.Println("modified file:", event.Name)
+				}
+			case err, ok := <-watcher.Errors:
+				if !ok {
+					return
+				}
+				log.Println("error:", err)
+			}
+		}
+	}()
 
-    // Add a path.
-    err = watcher.Add("/tmp")
-    if err != nil {
-        log.Fatal(err)
-    }
+	// Add a path.
+	err = watcher.Add("/tmp")
+	if err != nil {
+		log.Fatal(err)
+	}
 
-    // Block main goroutine forever.
-    <-make(chan struct{})
+	// Block main goroutine forever.
+	<-make(chan struct{})
 }
 
 var buildCmd = &cobra.Command{
