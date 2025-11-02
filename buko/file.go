@@ -50,8 +50,6 @@ func CopyDirectory(source, dest string) error {
 		dest := path.Join(dest, path.Base(filepath))
 
 		wg.Go(func() {
-			wg.Add(1)
-			defer wg.Done()
 			CopyFile(filepath, dest)
 		})
 

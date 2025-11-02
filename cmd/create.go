@@ -21,7 +21,7 @@ var createCmd = &cobra.Command{
 
 		title := args[0]
 
-		outputPath := path.Join(cwd, "markdown")
+		outputPath := path.Join(cwd, "markdown/posts")
 		server.CreateNewMarkdownFile(title, outputPath)
 	},
 }
